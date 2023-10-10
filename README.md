@@ -1,4 +1,1 @@
-To-do-list com backend, feito com React, NodeJs e usando um orm de banco de dados, o prisma.
-
-```bash
-npm run dev
+<h1> To-do-list com React, NodeJS e Prisma ORM</h1>
