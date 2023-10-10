@@ -24,12 +24,12 @@ export const exitsTodo = async (req: Request, res: Response, next: NextFunction)
 
 export const addTodo = async (req: Request, res: Response) => {
   try {
-    const { title, description, done } = req.body;
+    const { title, description } = req.body;
     const newTodo = await prisma.task.create({
       data: {
         title: title,
         description: description,
-        completed: done,
+        completed: false,
       },
     });
     return res.status(201).json(newTodo);
