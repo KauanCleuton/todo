@@ -11,7 +11,6 @@ const Page = () => {
   const [list, setList] = useState<List[]>([]);
   const [edit, setEdit] = useState(false);
   const [textEdit, setTextEdit] = useState('');
-  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     fetchData();
