@@ -7,8 +7,8 @@
     "dev:backend": "nodemon backend/index.ts",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     
-    "build": "next build",
-    "start": "next start",
+    "build": "npx prisma generate && next build",
+    "start": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "lint": "next lint"
   },
   "dependencies": {
