@@ -7,10 +7,9 @@
     "dev:backend": "nodemon backend/index.ts",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     
-    "build": "npx prisma generate && next build",
-    "start": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run postinstall:backend\"",
-    "lint": "next lint",
-    "postinstall": "prisma generate"
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@prisma/client": "^5.4.1",
