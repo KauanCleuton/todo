@@ -8,8 +8,9 @@
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     
     "build": "npx prisma generate && next build",
-    "start": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
-    "lint": "next lint"
+    "start": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run postinstall:backend\"",
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.4.1",
