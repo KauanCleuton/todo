@@ -1,14 +1,25 @@
 import { NextFunction, Request, Response } from 'express';
-import { PrismaClient} from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+type Todo = {
+  id: number;
+  title: string;
+  description: string | null;
+  completed: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  user_id: string;
+}
+
 export const exitsTodo = async (req: Request, res: Response, next: NextFunction) => {
+
   try {
     const todos = await prisma.task.findMany();
 
     const { id } = req.body;
-    const todoExists = todos.some(todo => todo.id === id);
+    const todoExists = todos.find((todo) => (todo as any).id === id);
 
     if (todoExists) {
       return res.status(500).json({ message: "Tarefa já existe!" });
@@ -72,7 +83,7 @@ export const deleteTodo = async (req: Request, res: Response) => {
 
     if (deletedTodo) {
       return res.status(200).json({ message: 'Tarefa excluída com sucesso', item: deletedTodo });
-      
+
     } else {
       return res.status(404).json({ message: 'Tarefa não encontrada' });
     }
@@ -90,7 +101,7 @@ export const completed = async (req: Request, res: Response) => {
       where: { id: id },
       data: { completed: completed },
     });
-    
+
     if (updatedTodo) {
       return res.status(200).json({ message: 'Tarefa completada com sucesso' });
     } else {
