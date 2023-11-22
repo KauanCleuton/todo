@@ -1,17 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { Task } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-type Todo = {
-  id: number;
-  title: string;
-  description: string | null;
-  completed: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  user_id: string;
-}
 
 export const exitsTodo = async (req: Request, res: Response, next: NextFunction) => {
 
@@ -19,7 +11,7 @@ export const exitsTodo = async (req: Request, res: Response, next: NextFunction)
     const todos = await prisma.task.findMany();
 
     const { id } = req.body;
-    const todoExists = todos.find((todo) => (todo as any).id === id);
+    const todoExists = todos.find((todo: Task) => todo.id === id);
 
     if (todoExists) {
       return res.status(500).json({ message: "Tarefa já existe!" });
